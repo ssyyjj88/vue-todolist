@@ -6,16 +6,18 @@
   	<input v-model="newItem" v-on:keyup.enter="addNew">
   	</input>
   	<ul>
-  		 <!--<li v-for="item in items" v-bind:class="[liClass]">-->
+  		<!--<li v-for="item in items" v-bind:class="[liClass]">-->
   		<li v-for="item in items" v-bind:class="{finished: item.isFinished}" v-on:click="toggleFinish(item)">
   			{{item.label}}
   		</li>
   	</ul>
+  	<component-a msgfromfather='yayaya'></component-a>
   </div>
 </template>
 
 <script>
 import Store from './store'
+import ComponentA from './components/componentA'
 // console.log(Store)
 export default {
 // name: 'app'
@@ -36,6 +38,7 @@ export default {
       newItem: ''
     }
   },
+  components: { ComponentA },
   watch: {
     items: {
       handler: function (items) {
