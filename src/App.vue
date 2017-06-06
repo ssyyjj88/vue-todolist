@@ -11,7 +11,8 @@
   			{{item.label}}
   		</li>
   	</ul>
-  	<component-a msgfromfather='yayaya'></component-a>
+  	<p>child tells me:{{ childWords }}</p>
+  	<component-a msgfromfather='yayaya' v-on:child-tell-me-something='listenToMyBoy'></component-a>
   </div>
 </template>
 
@@ -35,7 +36,8 @@ export default {
 //          isFinished: true
 //        }
 //    ],
-      newItem: ''
+      newItem: '',
+      childWords: ''
     }
   },
   components: { ComponentA },
@@ -59,6 +61,9 @@ export default {
       })
 //    console.log(this.newItem)
       this.newItem = ''
+    },
+    listenToMyBoy: function (msg) {
+      this.childWords = msg
     }
   }
 // data () {

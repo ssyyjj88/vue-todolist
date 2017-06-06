@@ -2,7 +2,7 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <h1>{{ msgfromfather }}</h1>
-    <button v-on:click="onClickMe">Click!</button>
+    <button v-on:click="onClickMe">open mouse!</button>
   </div>
 </template>
 
@@ -16,7 +16,10 @@ export default {
   props: ['msgfromfather'],
   methods: {
     onClickMe: function () {
-      console.log(this.msgfromfather)
+//      console.log(this.msgfromfather)
+//      debugger
+      this.$emit('child-tell-me-something', this.msg)
+// dispatch v-on 监听不到 使用events
     }
   }
 }
