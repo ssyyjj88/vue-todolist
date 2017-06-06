@@ -3,9 +3,11 @@
     <!--<h1>{{ title }}</h1>-->
     <!--<h1 v-text="title"></h1>-->
     <h1 v-html="title"></h1> <!-- title: '<span>?</span>this is a todo list'-->
+  	<input v-model="newItem" v-on:keyup.enter="addNew">
+  	</input>
   	<ul>
   		 <!--<li v-for="item in items" v-bind:class="[liClass]">-->
-  		<li v-for="item in items" v-bind:class="{finished: item.inFinished}">
+  		<li v-for="item in items" v-bind:class="{finished: item.isFinished}" v-on:click="toggleFinish(item)">
   			{{item.label}}
   		</li>
   	</ul>
@@ -21,13 +23,24 @@ export default {
       items: [
         {
           label: 'coding',
-          inFinished: false
+          isFinished: false
         },
         {
           label: 'walking',
-          inFinished: true
+          isFinished: true
         }
-      ]
+      ],
+      newItem: ''
+    }
+  },
+  methods: {
+    toggleFinish: function (item) {
+      item.isFinished = !item.isFinished
+      console.log(item.isFinished)
+    },
+    addNew: function () {
+      console.log(this.newItem)
+      this.newItem = ''
     }
   }
 // data () {
@@ -39,7 +52,6 @@ export default {
 </script>
 
 <style>
-
   .finished {
   	text-decoration: underline;
   }
