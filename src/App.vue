@@ -4,7 +4,8 @@
     <!--<h1 v-text="title"></h1>-->
     <h1 v-html="title"></h1> <!-- title: '<span>?</span>this is a todo list'-->
   	<ul>
-  		<li v-for="item in items">
+  		 <!--<li v-for="item in items" v-bind:class="[liClass]">-->
+  		<li v-for="item in items" v-bind:class="{finished: item.inFinished}">
   			{{item.label}}
   		</li>
   	</ul>
@@ -38,6 +39,10 @@ export default {
 </script>
 
 <style>
+
+  .finished {
+  	text-decoration: underline;
+  }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
