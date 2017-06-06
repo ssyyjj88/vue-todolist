@@ -15,31 +15,46 @@
 </template>
 
 <script>
+import Store from './store'
+// console.log(Store)
 export default {
 // name: 'app'
   data: function () {
     return {
       title: 'this is a todo list',
-      items: [
-        {
-          label: 'coding',
-          isFinished: false
-        },
-        {
-          label: 'walking',
-          isFinished: true
-        }
-      ],
+      items: Store.fetch(),
+//    [
+//        {
+//          label: 'coding',
+//          isFinished: false
+//        },
+//        {
+//          label: 'walking',
+//          isFinished: true
+//        }
+//    ],
       newItem: ''
+    }
+  },
+  watch: {
+    items: {
+      handler: function (items) {
+        Store.save(items)
+      },
+      deep: true
     }
   },
   methods: {
     toggleFinish: function (item) {
       item.isFinished = !item.isFinished
-      console.log(item.isFinished)
+//    console.log(item.isFinished)
     },
     addNew: function () {
-      console.log(this.newItem)
+      this.items.push({
+        label: this.newItem,
+        isFinished: false
+      })
+//    console.log(this.newItem)
       this.newItem = ''
     }
   }
